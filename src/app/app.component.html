@@ -1,3 +1,60 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		<br>
+			<form>
+				<div class="form-group">
+					<label for="nameOrColor"><h3>Enter pokemon's name or color:</h3> </label>
+					<br>
+					<input 
+						class="form-control" 
+						type="text" 
+						id="nameOrColor"
+						name="nameOrColor" 
+						[(ngModel)]="inputField">
+					<br>
+					<button 
+						class="btn btn-primary" 
+						(click)="onClick()"
+						>Search
+					</button>
+				</div>
+			</form>	
+			<br>
+
+			<div *ngIf="errorMessage; else elseBlock">
+				Pokemon with entered name or color do not exist!
+			</div>
+			<ng-template #elseBlock>
+				
+				<div *ngIf="display.pokemon_species">
+				<h3>List of {{display.name}}  pokemons: </h3>
+				<ul *ngFor="let specie of display.pokemon_species; let i = index " >
+					<li>{{display.pokemon_species[i].name}}</li>
+				</ul>
+			</div>
+
+			<div *ngIf="display.sprites">	
+				<h4>
+					Name: {{display.name}}
+				</h4>
+
+				<h4>
+					Id: {{display.id}}
+				</h4>
+				<h4>Picture:</h4>
+				<img [src]="display.sprites.front_default" width ="194px" alt="image of pokemon"class="img-thumbnail">	
+			</div>
+
+
+				
+			</ng-template>	
+			
+			
+
+		</div>
+	</div>
+</div>
+
+
+
